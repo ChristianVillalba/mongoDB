@@ -108,8 +108,61 @@ Using the projection parameter will be display only the specifed field we are lo
 The id will be displayed always by default.       
 `_id:0` as second parameter in projection will avoid this. `{name: 1 , _id:0}`
 
+**Update Operations**
 
+```
+db.products.updateOne({_id:1}, {$set:{stock:32} })
+```
+The first parameter is which record I want to update (I target the `_id`)     
+The second one is the information that will be updated.       
+In this case, we use `$set`to add a new field.
 
+**Update Operations**
+```
+db.collection.deleteOne()
+db.collection.deleteMany() 
+```
+You can specify criteria, or filters, that identify the documents to remove.        
+These filters use the same syntax as read operations.
+```
+db.products.deleteOne({name:"Pencil"})
+```
 
+### Relationships in MongoDB
+
+There's two main ways of doing this,        
+It will depends on how your data relates to each other and how it's structured.
+
+**One to Many**      
+Example: one product might have many reviews or one user might have created many comments.
+```
+db.products.insert(
+     {
+     _id:4,
+     name: "Pencil",
+     stock: 35,
+     reviews: [
+          {
+          authorName: "Jinny",
+          rating: 5,
+          },
+          {
+          authorName: "Poopy",
+          rating: 4,
+          },  
+     ]
+     }
+)
+```
+And then you could create another collection say a collection of orders this time.      
+And for each document in this collection we might have a **orderNumber** and       
+**productsOrdered** and this can simply be an array that references the id of the products in the
+products collection:
+```
+{
+oderNumber: 3234
+productsOrdered: [1, 2]
+}
+```
 
 
