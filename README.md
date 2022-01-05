@@ -27,3 +27,89 @@ Hit the Escape key on your keyboard to exit the insert mode. Type to save and ex
 ```
 :wq!
 ```
+
+## Open MongoDB
+To run a Mongo Server. In the (Hyper) Terminal type:
+```
+mongod
+```
+The our local database will be run on port 27017.      
+Then we can open up a brand new Terminal. And this is a different connection
+This terminal is connected to the MongoDB database and we can tap into the **Mongo Shell**:
+```
+mongo
+```
+The **Mongo Shell** is basically just a way for us to be able to interact with 
+our MongoDB databases on our local system using the command line.
+
+## Check the Databases we already have in our system:
+In the Terminal:        
+`help` (if neccessary) > `show dbs`
+It will show 3 preloaded databases: adming, confg & local.         
+
+## Basic Commands:
+[MongoDB Documentation](https://docs.mongodb.com/manual/)  
+
+Create Database          
+```
+use myDatabaseName
+```       
+Show my current Database         
+```
+db
+```        
+### CRUD Operations: [CRUD Operations Documentation](https://docs.mongodb.com/manual/crud/)      
+**Create Operations**
+```
+db.collection.insertOne()
+db.collection.insertMany()
+```
+`collection` is actually the name of a collection.        
+
+Create or insert operations add new documents to a collection.        
+If the collection does not currently exist, insert operations will create the collection.     
+example:
+```
+db.users.insertOne(
+     {
+          name: "Cristian"
+          age: 81
+          status: "confused"
+     }
+)
+```
+Collections in MongoDB is kind of similar to tables in the SQL world.       
+They are a collection of documents and a document is simply just a single data record,    
+so that would be a single row.      
+```
+> db.products.insertOne({_id:1, name: "Pen", price: 1.2  })
+{ "acknowledged" : true, "insertedId" : 1 }
+```
+When the data is added to the database, we can show the collections:
+```
+show collections  
+```
+**Retrive Operations: Reading & Queries**
+```
+db.collection.find(query, projection)
+```
+Both parameters, query & prjection are optional. Example:
+```
+db.products.find()
+```
+Will display all the products we put in our database.  
+
+The parameters will narrow down on the data we are going to get back.
+```
+db.products.find({price: {$gt: 1}, {name: 1}})
+```
+Using Query will display only the products with a price ($gt:1) grater than 1.      
+Using the projection parameter will be display only the specifed field we are looking for:      
+The id will be displayed always by default.       
+`_id:0` as second parameter in projection will avoid this. `{name: 1 , _id:0}`
+
+
+
+
+
+
