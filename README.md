@@ -165,4 +165,24 @@ productsOrdered: [1, 2]
 }
 ```
 
+### MongoDB with Node.js
+
+**Drivers**       
+The MongoDB's Driver is what's going to enable our MongoDB to interact with our application.      
+
+[MongoDB Node Driver](https://docs.mongodb.com/drivers/node/current/)     
+
+How to integrate all MongoDB database with our Node.js application. Two options:
+* MongoDB Native Driver
+* Mongoose: ODM (Object Document Mapper) 
+
+**MongoDB Native Driver**
+
+
+**Mongoose**     
+It vastly simplifies and cuts down on the code that's required to work with a MongoDB database.
+
+
+
+
 
