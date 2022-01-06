@@ -191,7 +191,8 @@ In this case, I used the Documentation (3.5) to
 [MongoDb node.js driver 3.5](https://mongodb.github.io/node-mongodb-native/3.5/quick-start/quick-start/).    
 I copied in app.js the coded included in the sections:     
 - Connect to MongoDB       
-- Insert a Document       
+- Insert a Document     
+- Find All Documents   
 Change 
 ```javascript
 const collection = db.collection('documents');
@@ -200,10 +201,8 @@ to
 ```javascript
 const collection = db.collection("myCollection");
 ```
-In this case, it will be called `"fruits"`
-
-
-The reason is that developers will rarely use the native MongoDB driver.
+In this case, it will be called `"fruits"`         
+Also in `findDocuments`, change docs to fruits.     
 
 **Runnig the App:**   
 ```
@@ -215,14 +214,53 @@ will mean that we need to run the mongo server first:
 mongod
 ```
 
+**Editing our App:**  
+We've got a collection called fruits inside our app.js       
+And this is equivalent to when we used our a database and we used `db.fruits.insert`      
+We use `insertMany` to insert our collections:
+```javascript
+collection.insertMany(...)
+```
+We change     
+```javascript
+client.close();
+```
+to      
+```javascript
+insertDocuments(db, function() {
+    client.close();
+  });
+```
+This way only once it's done inserting the documents        
+do we close the connection to our database.
+
+Note; in case of Error: Cannot read properties of undefined (reading 'n').
+change:  
+```
+assert.equal(3, result.result.n);
+assert.equal(3, result.ops.length);
+```
+to
+```
+assert.equal(3,result.insertedCount);
+assert.equal(3,Object.keys(result.insertedIds).length);
+```
+Save and run.
+
+**Checking Database in our Terminal (New Tab)**
+```
+show dbs
+use FruitsDB
+show collections
+db.fruits.find()
+```
 
 
 
-
-**MongoDB Native Driver**
-
+**MongoDB Native Driver**        
+Developers will rarely use the native MongoDB driver.       
 **Mongoose**     
-It vastly simplifies and cuts down on the code that's required to work with a MongoDB database.
+It vastly simplifies and cuts down on the code that's required to work with a MongoDB database.        
 
 
 
