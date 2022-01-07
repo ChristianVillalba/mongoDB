@@ -236,12 +236,12 @@ do we close the connection to our database.
 
 Note; in case of Error: Cannot read properties of undefined (reading 'n').
 change:  
-```
+```javascript
 assert.equal(3, result.result.n);
 assert.equal(3, result.ops.length);
 ```
 to
-```
+```javascript
 assert.equal(3,result.insertedCount);
 assert.equal(3,Object.keys(result.insertedIds).length);
 ```
@@ -249,6 +249,7 @@ Save and run.
 
 **Checking Database in our Terminal (New Tab)**
 ```
+mongo
 show dbs
 use FruitsDB
 show collections
@@ -256,7 +257,7 @@ db.fruits.find()
 ```
 
 
-
+This was an example of how to use     
 **MongoDB Native Driver**        
 Developers will rarely use the native MongoDB driver.       
 **Mongoose**     
